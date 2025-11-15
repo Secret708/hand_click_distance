@@ -23,6 +23,8 @@ class HandDistance():
         CLICK_COOLDOWN: float=1.0,
         MOUSE_BUTTON: str='left'
         ):
+        """Создаём константы и переменные, которые нужны в классе.
+           И также ставим ограничения на параметры класса"""
         BUTTON_DICT = {
             'left': Button.left,
             'right': Button.right,
@@ -86,6 +88,7 @@ class HandDistance():
         self.WRITER = cv2.VideoWriter(self.VIDEO_PATH, self.FOURCC, 20.0, (FRAME_WIDTH, FRAME_HEIGHT))
         
     def get_hand_and_distance(self, frame) -> any:
+        """Получаем координаты пальцев и landmark"""
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = self.hands_points.process(rgb)
         
@@ -111,6 +114,7 @@ class HandDistance():
         return None, None, None, None, None
     
     def get_monitor_size(self) -> tuple[int, int]:
+        """Получаем размер монитора и сравниваем его с пользовательскими константами"""
         monitor = get_monitors()
         total_monitors = len(get_monitors())
         
@@ -124,6 +128,7 @@ class HandDistance():
         return WIDTH, HEIGHT
     
     def is_click(self, distance) -> bool:
+        """Проверяем, надо ли совершать клик сейчас"""
         current_time = time.time()
         if current_time - self.last_click_time >= self.cooldown: 
             if self.DISTANCE_FOR_CLICK < distance:
@@ -137,7 +142,8 @@ class HandDistance():
         else:
             return False
     
-    def calc_time_by_distance(self, thumb_x, thumb_y, index_x, index_y):
+    def calc_time_by_distance(self, thumb_x, thumb_y, index_x, index_y) -> tuple[float, float, float]:
+        """Высчитываем дистанцию между двумя пальцами и возвращаем её"""
         distance = math.sqrt((thumb_x - index_x)**2 + (thumb_y - index_y)**2) / 2
         
         mid_x = (thumb_x + index_x) // 2
@@ -146,6 +152,7 @@ class HandDistance():
         return distance, mid_x, mid_y
     
     def run(self) -> any:
+        """Главный цикл программы с записью камеры"""
         while self.CAP.isOpened():
             ret, frame = self.CAP.read()
             if not ret:
