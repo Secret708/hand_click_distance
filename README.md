@@ -65,13 +65,12 @@ pip install -r requirements.txt
 ```
 5. Запусти
 ```bash
-python neiro.py
-# или
-python neiro_with_comments.py
+python hand_click_distance.py
 ```
 ## Поддержи автора 
 
 - 💬 [Telegram](https://t.me/programmingbasicschan)
 - 📺 [TikTok](https://tiktok.com/@code_basics)
+
 
 ## Буду рад вашей подписке!
