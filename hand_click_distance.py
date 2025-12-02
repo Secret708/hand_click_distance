@@ -20,7 +20,7 @@ class HandDistance():
         THICKNESS_TEXT: int=2,
         DISTANCE_FOR_CLICK: int=80,
         CLICK_COUNT: int=1,
-        CLICK_COOLDOWN: float=1.0,
+        CLICK_COOLDOWN: float=0.3,
         MOUSE_BUTTON: str='left'
         ):
         """Создаём константы и переменные, которые нужны в классе.
@@ -57,8 +57,8 @@ class HandDistance():
         if self.CLICK_COUNT > 3:
             raise ValueError('CLICK_COUNT must be less than 3')
         self.cooldown = CLICK_COOLDOWN
-        if self.cooldown < 1:
-            raise ValueError('CLICK_COOLDOWN must be more than 1')
+        if self.cooldown < 0:
+            raise ValueError('CLICK_COOLDOWN must be more than 0')
         if MOUSE_BUTTON in BUTTON_DICT:
             self.BUTTON = BUTTON_DICT[MOUSE_BUTTON]
         else:
@@ -196,3 +196,4 @@ class HandDistance():
 if __name__ == '__main__':
     hand = HandDistance()
     hand.run()
+
