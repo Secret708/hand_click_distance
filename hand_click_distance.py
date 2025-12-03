@@ -142,7 +142,7 @@ class HandDistance():
         else:
             return False
     
-    def calc_time_by_distance(self, thumb_x, thumb_y, index_x, index_y) -> tuple[float, float, float]:
+    def calc_distance(self, thumb_x, thumb_y, index_x, index_y) -> tuple[float, float, float]:
         """Высчитываем дистанцию между двумя пальцами и возвращаем её"""
         distance = math.sqrt((thumb_x - index_x)**2 + (thumb_y - index_y)**2) / 2
         
@@ -196,4 +196,5 @@ class HandDistance():
 if __name__ == '__main__':
     hand = HandDistance()
     hand.run()
+
 
